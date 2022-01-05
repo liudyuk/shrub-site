@@ -121,7 +121,7 @@ print(tabPts.limit(5));
 Export.table.toDrive({
     collection: tabPts, 
     folder: 'Shrub_sites_update_2022-01-05',
-    description: 'Shrub_sites_NA_Soil_'+lyr_name+'_plotsPoints',
+    description: 'Shrub_sites_NA_SoilContent_'+lyr_name+'_plotsPoints',
     fileFormat: 'CSV'
 });
 
@@ -129,7 +129,7 @@ var tabBuf = ee.FeatureCollection(outBuf.toList(outBuf.size()));
 Export.table.toDrive({
     collection: tabBuf , 
     folder: 'Shrub_sites_update_2022-01-05',
-    description: 'Shrub_sites_NA_Soil_'+lyr_name+'_'+'plotsBuffered'+radiusBuffer+'m',
+    description: 'Shrub_sites_NA_SoilContent_'+lyr_name+'_'+'plotsBuffered'+radiusBuffer+'m',
     fileFormat: 'CSV'
 });
 
