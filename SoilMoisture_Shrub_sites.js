@@ -10,7 +10,7 @@ Map.setZoom(0);
 //--------------------
 // Parameters to edit
 //--------------------
-var siteFile = "Daijun/shrub_site_NA"; // Name of the file that contains site id and their locations in latlon WGS84
+var siteFile = "Daijun/Shrub_sites_NA"; // Name of the file that contains site id and their locations in latlon WGS84
 var id = 'ID'; // Name of the column containing site id 
 
 var startYear=1980;
@@ -37,19 +37,16 @@ Map.addLayer(plots);
 var lyr_names = ['SoilMoi0_10cm_inst','SoilMoi10_40cm_inst','SoilMoi40_100cm_inst','SoilMoi100_200cm_inst'];
 
 for (var i = startYear; i<endYear ;i++) { 
-//for (var i = 1980; i<2000 ;i++) { // for years <2000
+
 
 var year = ee.String(ee.Number(i));
 var yearE = ee.String(ee.Number(i+1)); // excluded, this is to include 31 december of year i
 
 
-//var vis = {min: 1.99, max: 47.59, palette: ['blue', 'green', 'yellow', 'red']};
-//Map.addLayer(lyr, vis, '');
-
-// ESA soil moisture also 0.25 resolution
 //var lyr = ee.ImageCollection('NASA/GLDAS/V021/NOAH/G025/T3H').select(lyr_names).filter(ee.Filter.date(year.cat('-01-01'), yearE.cat('-01-01'))).sort('system:time_start'); // GLDAS v 2.1
 var lyr = ee.ImageCollection('NASA/GLDAS/V20/NOAH/G025/T3H').select(lyr_names).filter(ee.Filter.date(year.cat('-01-01'), yearE.cat('-01-01'))).sort('system:time_start'); // GLDAS v 2.0 for years <2000
 //print(lyr.limit(5))
+//var vis = {min: 1.99, max: 47.59, palette: ['blue', 'green', 'yellow', 'red']};
 //Map.addLayer(lyr, {}, 'lyr');
 
 
@@ -98,7 +95,7 @@ var tabPts = ee.FeatureCollection(outPts.toList(outPts.size()));
 print(tabPts.limit(5));
 Export.table.toDrive({
     collection: tabPts, 
-    folder: 'Shrub_sites_update_2021-12-31',
+    folder: 'Shrub_sites_update_2022-01-05',
     description: 'shrub_sites_NA_SoilMoisture_kgM2_Means_'+i+GLDASv,
     fileFormat: 'CSV'
 });
