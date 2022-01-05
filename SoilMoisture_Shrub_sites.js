@@ -96,7 +96,7 @@ print(tabPts.limit(5));
 Export.table.toDrive({
     collection: tabPts, 
     folder: 'Shrub_sites_update_2022-01-05',
-    description: 'shrub_sites_NA_SoilMoisture_kgM2_Means_'+i+GLDASv,
+    description: 'Shrub_sites_NA_SoilMoisture_kgM2_Means_'+i+GLDASv,
     fileFormat: 'CSV'
 });
 
