@@ -6,13 +6,23 @@
 
 Map.setZoom(0);
 
+
+//-------------------
 // Parameters to edit
-var siteFile = "Daijun/shrub_site_NA";  // Name of the file that contains site id and their locations in latlon WGS84
+//-------------------
+
+var siteFile = "Daijun/Shrub_sites_NA";  // Name of the file that contains site id and their locations in latlon WGS84
 var id = 'ID'; // Name of the column containing site id 
 
 var radiusBuffer = 500; // Buffer width to apply in meters
 //var res = 250 // resolution of processing in meters (to align with SoilGrids)
- 
+
+
+//--------------
+// Import
+//--------------
+
+
 // Updated list of available layers in GEE SoilGrid https://git.wur.nl/isric/soilgrids/soilgrids.notebooks/-/blob/master/markdown/access_on_gee.md 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 // bdod_mean > Bulk density)
@@ -30,15 +40,15 @@ var radiusBuffer = 500; // Buffer width to apply in meters
 var lyr_name = 'bdod_mean'; // Layer to import from isric dataset https://git.wur.nl/isric/soilgrids/soilgrids.notebooks/-/blob/master/markdown/access_on_gee.md
 
 
-// Import
 var plots = ee.FeatureCollection("users/NXA807/"+siteFile);
 var lyr = ee.Image(ee.String("projects/soilgrids-isric/"+ lyr_name));
 
 
+//--------------
 // Mapping
+//--------------
 Map.addLayer(lyr,{}, lyr_name);
 Map.addLayer(plots);
-
 
 
 //--------------
@@ -110,7 +120,7 @@ var tabPts = ee.FeatureCollection(outPts.toList(outPts.size()));
 print(tabPts.limit(5));
 Export.table.toDrive({
     collection: tabPts, 
-    folder: 'Shrub_sites_update_2021-12-31/',
+    folder: 'Shrub_sites_update_2022-01-05',
     description: 'Shrub_sites_NA_Soil_'+lyr_name+'_plotsPoints',
     fileFormat: 'CSV'
 });
@@ -118,7 +128,7 @@ Export.table.toDrive({
 var tabBuf = ee.FeatureCollection(outBuf.toList(outBuf.size()));
 Export.table.toDrive({
     collection: tabBuf , 
-    folder: 'Shrub_sites_update_2021-12-31/',
+    folder: 'Shrub_sites_update_2022-01-05',
     description: 'Shrub_sites_NA_Soil_'+lyr_name+'_'+'plotsBuffered'+radiusBuffer+'m',
     fileFormat: 'CSV'
 });
